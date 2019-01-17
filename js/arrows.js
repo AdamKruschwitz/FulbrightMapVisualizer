@@ -8,8 +8,9 @@ const arrowLength = 8,                      // Length of arrows (in units?)
 
 var arrows = [],                            // An array to store all arrows
     arrowsSize = 0;                         // the size of the arrows array
+var maxCount = 0;
 
-function makeArrow(startPoint, endPoint, group) {
+function makeArrow(startPoint, endPoint, year, count) {
 
     // load a resource
     ObjLoader.load(
@@ -23,7 +24,7 @@ function makeArrow(startPoint, endPoint, group) {
             let endVector3 = vertex(endPoint);
 
             //DEBUG: set random time values
-            object.year = randIntBetween(1997, 2019);
+            object.year = year;
             object.start = startVector3;
             object.end = endVector3;
 
@@ -32,8 +33,8 @@ function makeArrow(startPoint, endPoint, group) {
 
             // Determine the scale values of the arrow
             let zScale = startVector3.distanceTo(endVector3) / arrowLength;
-            let yScale = findArrowCurrentHeight(startVector3, endVector3, object.year);
-            let xScale = zScale;
+            let yScale = findArrowCurrentHeight(startVector3, endVector3, year);
+            let xScale = zScale * count / maxCount;
             object.scale.set(xScale, yScale, zScale);
 
             /*
@@ -134,16 +135,75 @@ function makeArrowsFromPlaces(numOfArrows) {
      */
     for(let i=0; i<numOfArrows; i++) {
         let rand1 = Math.floor(Math.random() * places.length),
-            rand2 = Math.floor(Math.random() * places.length),
-            group;
+            rand2 = Math.floor(Math.random() * places.length);
 
-        if(i%2) group = true;
-        else group = false;
         if(rand1 == rand2)
             i--;
         else
-            makeArrow(places[rand1], places[rand2], group);
+            makeArrow(places[rand1], places[rand2]);
     }
+}
+
+function makeArrowsFromAllData() {
+    // Sort records by year, then by to location, then by from location
+    records.sort(function(a, b) {
+        if(a["TR_Institution"] < b["TR_Institution"])
+            return -1;
+        else if(a["TR_Institution"] > b["TR_Institution"])
+            return 1;
+        else return 0;
+    });
+
+    records.sort(function(a, b) {
+        if(a["US_Institution"] < b["US_Institution"])
+            return -1;
+        else if(a["US_Institution"] > b["US_Institution"])
+            return 1;
+        else return 0;
+    });
+
+    records.sort(function(a, b) {
+        if(a["Grant Date"] < b["Grant Date"])
+            return -1;
+        else if(a["Grant Date"] > b["Grant Date"])
+            return 1;
+        else return 0;
+    });
+
+    // Count records with the same from, to, and year, and make an arrow for each unique combination
+    let uniqueArrows = [];
+
+    let i=1,
+        curTRInstitution = records[0]["TR_Institution"],
+        curUSInstitution = records[0]["US_Institution"],
+        curGrantDate = records[0]["Grant Date"],
+        count = 1;
+    while(i < records.length) {
+        if(records[i]["TR_Institution"] === curTRInstitution &&
+            records[i]["US_Institution"] === curUSInstitution &&
+            records[i]["Grant Date"] === curGrantDate) {
+            count++;
+        }
+        else {
+            uniqueArrows[uniqueArrows.length] = {"start":locationDictionary[curTRInstitution], "end":locationDictionary[curUSInstitution], "year":curGrantDate, "count":count};
+            if(maxCount < count) maxCount = count;
+            if(locationDictionary[records[i]["TR_Institution"]] !== undefined && locationDictionary[records[i]["US_Institution"]] !== undefined) {
+                curTRInstitution = records[i]["TR_Institution"];
+                curUSInstitution = records[i]["US_Institution"];
+                curGrantDate = records[i]["Grant Date"];
+                count = 1;
+            } else console.log("Error: one or more record locations not in dictionary");
+        }
+
+        i++;
+    }
+
+    uniqueArrows[uniqueArrows.length] = {"start":locationDictionary[curTRInstitution], "end":locationDictionary[curUSInstitution], "year":curGrantDate, "count":count};
+    if(maxCount < count) maxCount = count;
+
+    uniqueArrows.forEach(function(arrow) {
+        makeArrow(arrow["start"], arrow["end"], arrow["year"], arrow["count"]);
+    });
 }
 
 /*

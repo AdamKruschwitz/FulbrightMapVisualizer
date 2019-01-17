@@ -22,7 +22,9 @@ document.body.appendChild(renderer.domElement);
 
 scene.add(pivot);
 
-makeArrowsFromPlaces(20);
+//makeArrowsFromPlaces(20);
 //makeArrowsFromPlaces(1);
+makeArrowsFromAllData();
+arrowsUpdate();
 
 renderer.render(scene, camera);
