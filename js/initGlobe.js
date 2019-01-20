@@ -2,31 +2,33 @@
 //import * as THREE from "../libs/three";
 const radius = 228;
 
-let mesh,
-    graticule;
+function initGlobe() {
+    let mesh,
+        graticule;
 
-d3.json("data/map.json", function(error, topology) {
-    if (error) throw error;
+    d3.json("data/map.json", function (error, topology) {
+        if (error) throw error;
 
-    // Create the graticule and land mesh
-    graticule = wireframe(graticule10(), new THREE.LineBasicMaterial({color: 0xaaaaaa}));
-    mesh = wireframe(topojson.mesh(topology, topology.objects.land), new THREE.LineBasicMaterial({color: 0xff0000}));
+        // Create the graticule and land mesh
+        graticule = wireframe(graticule10(), new THREE.LineBasicMaterial({color: 0xaaaaaa}));
+        mesh = wireframe(topojson.mesh(topology, topology.objects.land), new THREE.LineBasicMaterial({color: 0xff0000}));
 
-    // Make them children of the pivot object
-    pivot.add(mesh);
-    pivot.add(graticule);
+        // Make them children of the pivot object
+        pivot.add(mesh);
+        pivot.add(graticule);
 
-    //scene.add(mesh);
-    //scene.add(graticule);
+        //scene.add(mesh);
+        //scene.add(graticule);
 
-    //pivot.rotation.x = -90;
+        //pivot.rotation.x = -90;
 
-    d3.timer(function(t) {
-        //pivot.rotation.y += 0.01;
-        renderer.render(scene, camera);
+        d3.timer(function (t) {
+            //pivot.rotation.y += 0.01;
+            renderer.render(scene, camera);
+        });
+
     });
-
-});
+}
 
 function wireframe(multilinestring, material) {
     let geometry = new THREE.Geometry;

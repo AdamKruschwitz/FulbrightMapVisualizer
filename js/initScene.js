@@ -12,19 +12,22 @@ var canvas = document.createElement( 'canvas' ),
     ObjLoader = new THREE.OBJLoader(),
     pivot = new THREE.Object3D();
 
-light.position.set( 0, 0, 1 );
-scene.add( light );
+function initScene() {
+    light.position.set(0, 0, 1);
+    scene.add(light);
 
-camera.position.z = 600;
-renderer.setPixelRatio(window.devicePixelRatio);
-renderer.setSize(width, height);
-document.body.appendChild(renderer.domElement);
+    camera.position.z = 600;
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setSize(width, height);
+    document.body.appendChild(renderer.domElement);
 
-scene.add(pivot);
+    scene.add(pivot);
 
-//makeArrowsFromPlaces(20);
-//makeArrowsFromPlaces(1);
-makeArrowsFromAllData();
-arrowsUpdate();
+    //makeArrowsFromPlaces(20);
+    //makeArrowsFromPlaces(1);
+    makeArrowsFromAllData();
+    arrowsUpdate();
 
-renderer.render(scene, camera);
+    renderer.render(scene, camera);
+
+}

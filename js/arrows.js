@@ -27,6 +27,8 @@ function makeArrow(startPoint, endPoint, year, count) {
             object.year = year;
             object.start = startVector3;
             object.end = endVector3;
+            object.startLatLng = startPoint;
+            object.endLatLng = endPoint;
 
             // Set the arrow at the starting location.
             object.position.set(startVector3.x, startVector3.y, startVector3.z);
@@ -104,7 +106,7 @@ function makeArrow(startPoint, endPoint, year, count) {
         // called when loading is in progresses
         function ( xhr ) {
 
-            console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+            //console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
 
         },
         // called when loading has errors
@@ -187,6 +189,8 @@ function makeArrowsFromAllData() {
         else {
             uniqueArrows[uniqueArrows.length] = {"start":locationDictionary[curTRInstitution], "end":locationDictionary[curUSInstitution], "year":curGrantDate, "count":count};
             if(maxCount < count) maxCount = count;
+            /*uniqueArrows[uniqueArrows.length-1]["end"][0] *= -1;
+            uniqueArrows[uniqueArrows.length-1]["end"][1] *= -1;*/
             if(locationDictionary[records[i]["TR_Institution"]] !== undefined && locationDictionary[records[i]["US_Institution"]] !== undefined) {
                 curTRInstitution = records[i]["TR_Institution"];
                 curUSInstitution = records[i]["US_Institution"];
@@ -204,6 +208,7 @@ function makeArrowsFromAllData() {
     uniqueArrows.forEach(function(arrow) {
         makeArrow(arrow["start"], arrow["end"], arrow["year"], arrow["count"]);
     });
+    arrowsUpdate();
 }
 
 /*

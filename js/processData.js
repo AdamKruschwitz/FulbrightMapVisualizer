@@ -9,7 +9,6 @@ $(document).ready(function() {
         dataType: "json",
         success: function (data) {
             locationDictionary = data;
-            console.log(data);
             getDatabase();
         }
     });
@@ -29,7 +28,8 @@ let getDatabase = function() {
 function processData(data) {
     let allTextLines = data.split(/\r\n|\n/);
     let headers = allTextLines[0].split('\t'); // ["Name", "Grant Date", "Current Position", "Field of Specialization", "TR_Institution", "US_Institution", "category", "address", "city", "e-mail address", "work e-mail", "work address", "work city", "work phone number", "fax number", "cell phone number", "home phone number"]
-    console.log(headers);
+    //console.log(headers);
+    let deffereds = [];
     for(let i=1; i<allTextLines.length; i++) {
         let recordData = allTextLines[i].split('\t');
         let record = {};
@@ -46,7 +46,7 @@ function processData(data) {
 
                 let url = "https://maps.googleapis.com/maps/api/geocode/json?address=";
                 url += address.replace(" ", "%20") + "%20Turkey&key=" + key;
-                $.get(url, callbackFunction(address))
+                deffereds.push($.get(url, callbackFunction(address)));
             }
 
             if (locationDictionary[record[headers[5]]] === undefined) { // US_Institution or to institution
@@ -54,33 +54,92 @@ function processData(data) {
 
                 let url = "https://maps.googleapis.com/maps/api/geocode/json?address=";
                 url += address.replace(" ", "%20") + "%20USA&key=" + key;
-                $.get(url, callbackFunction(address))
+                deffereds.push($.get(url, callbackFunction(address)));
             }
 
-            records[records.length] = record; // Add the record to the end of records
+            records.push(record); // Add the record to the end of records
         }
 
     }
+    console.log("out of for loop");
+    $.when.apply(deffereds).then(function(){
+        console.log("ran function");
+        initScene();
+        initGlobe();
+        initUI();
+        arrowsUpdate();
+    });
 }
 
+/*function processData(data) {
+    let allTextLines = data.split(/\r\n|\n/);
+
+    let deffereds = [];
+    $.each(allTextLines, function(index, line) {
+        let headers = [];
+        if(index === 0) headers = line.split('\t'); // ["Name", "Grant Date", "Current Position", "Field of Specialization", "TR_Institution", "US_Institution", "category", "address", "city", "e-mail address", "work e-mail", "work address", "work city", "work phone number", "fax number", "cell phone number", "home phone number"]
+        else {
+            let recordData = line.split('\t');
+            let record = {};
+            $.each(headers, function (index, header) {
+                console.log(header);
+                console.log(recordData[index]);
+                record[header] = recordData[index];
+            });
+            console.log(record);
+
+            // Get the location data from Google API
+            if (locationDictionary[record["TR_Institution"]] === undefined) {
+                let address = record["TR_Institution"];
+                console.log(address);
+                let url = "https://maps.googleapis.com/maps/api/geocode/json?address=";
+                url += address.replace(" ", "%20") + "%20Turkey&key=" + key;
+                deffereds.push(
+                    $.get(url, callbackFunction(address))
+                );
+            }
+
+            if (locationDictionary[record["US_Institution"]] === undefined) {
+                let address = record["US_Institution"];
+                let url = "https://maps.googleapis.com/maps/api/geocode/json?address=";
+                url += address.replace(" ", "%20") + "%20USA&key=" + key;
+                deffereds.push(
+                    $.get(url, callbackFunction(address))
+                );
+            }
+        }
+        console.log(headers);
+    });
+
+    $.when.apply($, deffereds).then(function() {
+        initScene();
+        initGlobe();
+        initUI();
+    })
+}*/
+
+
+
+
+
+
+
+
+/*
+Wrapper function for saving the data. Need to keep the given address in scope bc Google sends back the address they
+thought I asked for.
+ */
 let callbackFunction = function(address) {
     return function(data) {
         console.log(data);
         if(data["status"] === "OK") {
             let latlng = [
-                data["results"][0]["geometry"]["location"]["lat"],
-                data["results"][0]["geometry"]["location"]["lng"]
+                data["results"][0]["geometry"]["location"]["lng"],
+                data["results"][0]["geometry"]["location"]["lat"]
             ];
             locationDictionary[address] = latlng;
         }
-        else console.log("Error: Something went wrong with Geocode API");
+        //else console.log("Error: Something went wrong with Geocode API");
     }
 };
 
-/*
-let address = records[0]["TR_Institution"];
- + address + '&key=' + key;
-$.get(url, function(data) {
-    console.log(data);
-});
-*/

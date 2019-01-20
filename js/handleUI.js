@@ -10,10 +10,25 @@ let m0,
     output1 = document.getElementById("demoSlider"),
     output2 = document.getElementById("demoRange");
 
-let myWindow = d3.select(canvas)
-    .on("mousedown", mousedown)
-    .on("mousemove", mousemove)
-    .on("mouseup", mouseup);
+function initUI() {
+    let myWindow = d3.select(canvas)
+        .on("mousedown", mousedown)
+        .on("mousemove", mousemove)
+        .on("mouseup", mouseup);
+
+    output1.innerHTML = slider.value;
+    output2.innerHTML = range.value;
+
+    slider.oninput = function() {
+        output1.innerHTML = this.value;
+        arrowsUpdate();
+    };
+
+    range.oninput = function() {
+        output2.innerHTML = this.value;
+        arrowsUpdate();
+    };
+}
 
 // Sets variables for globe control
 function mousedown() {
@@ -41,16 +56,3 @@ function mouseup() {
         m0 = null;
     }
 }
-
-output1.innerHTML = slider.value;
-output2.innerHTML = range.value;
-
-slider.oninput = function() {
-    output1.innerHTML = this.value;
-    arrowsUpdate();
-};
-
-range.oninput = function() {
-    output2.innerHTML = this.value;
-    arrowsUpdate();
-};
