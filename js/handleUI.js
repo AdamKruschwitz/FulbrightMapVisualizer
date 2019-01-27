@@ -2,7 +2,8 @@
 const turnSpeed = 90;
 
 var slider = document.getElementById("timeSlider"),
-    range = document.getElementById("rangeNumber");
+    range = document.getElementById("rangeNumber"),
+    subjectSelector = document.getElementById("subjectSelector");
 
 let m0,
     o0x,
@@ -16,6 +17,12 @@ function initUI() {
         .on("mousemove", mousemove)
         .on("mouseup", mouseup);
 
+    let options = "";
+    for(let subject in subjectDictionary) {
+        options += '<option value="' + subject + '">' + subject + '</option>';
+    }
+    subjectSelector.innerHTML = options;
+
     output1.innerHTML = slider.value;
     output2.innerHTML = range.value;
 
@@ -28,6 +35,11 @@ function initUI() {
         output2.innerHTML = this.value;
         arrowsUpdate();
     };
+
+    subjectSelector.oninput = function() {
+        changeSubject(subjectSelector.value);
+        arrowsUpdate();
+    }
 }
 
 // Sets variables for globe control

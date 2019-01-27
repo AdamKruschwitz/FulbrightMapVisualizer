@@ -3,12 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="641e9ea4-d9a9-4c78-84f1-364387bab46d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/locationDictionary.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/locationDictionary.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/arrows.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/arrows.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/handleUI.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/handleUI.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/initGlobe.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/initGlobe.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/initScene.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/initScene.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/loadData.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/js/processData.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/processData.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -24,21 +23,21 @@
     <session id="1654002844">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="6" />
-          <entry key="project.open.time.1" value="2" />
+          <entry key="project.closed" value="8" />
+          <entry key="project.open.time.1" value="3" />
           <entry key="project.open.time.14" value="1" />
           <entry key="project.open.time.15" value="1" />
           <entry key="project.open.time.6" value="1" />
           <entry key="project.open.time.7" value="1" />
           <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="7" />
+          <entry key="project.opened" value="8" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="csv" value="4" />
           <entry key="html" value="1" />
-          <entry key="js" value="11" />
+          <entry key="js" value="13" />
           <entry key="json" value="4" />
           <entry key="mtl" value="1" />
           <entry key="tsv" value="1" />
@@ -50,41 +49,41 @@
           <entry key="CSV" value="2" />
           <entry key="HTML" value="1" />
           <entry key="JSON" value="4" />
-          <entry key="JavaScript" value="11" />
+          <entry key="JavaScript" value="13" />
           <entry key="PLAIN_TEXT" value="4" />
           <entry key="TSV" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="html" value="222" />
-          <entry key="js" value="6992" />
+          <entry key="html" value="2896" />
+          <entry key="js" value="9079" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="222" />
-          <entry key="JavaScript" value="6992" />
+          <entry key="HTML" value="2896" />
+          <entry key="JavaScript" value="9079" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="30" column="25" selection-start-line="30" selection-start-column="25" selection-end-line="30" selection-end-column="25" />
+            <state relative-caret-position="593">
+              <caret line="58" lean-forward="true" selection-start-line="58" selection-end-line="58" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/processData.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="260">
-              <caret line="69" column="23" selection-start-line="69" selection-start-column="23" selection-end-line="69" selection-end-column="23" />
+            <state relative-caret-position="200">
+              <caret line="89" column="122" selection-start-line="89" selection-start-column="99" selection-end-line="89" selection-end-column="122" />
             </state>
           </provider>
         </entry>
@@ -92,12 +91,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/arrows.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1676">
-              <caret line="114" column="12" lean-forward="true" selection-start-line="114" selection-start-column="12" selection-end-line="114" selection-end-column="12" />
+            <state relative-caret-position="150">
+              <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="n#!!block;n#makeArrowsFromPlaces#0" />
-                <element signature="n#!!block;n#arrowsUpdate#0" />
                 <element signature="n#!!block;n#makeRandomArrows#0" />
                 <element signature="n#!!block;n#findArrowMinimumHeight#0" />
                 <element signature="n#!!block;n#findArrowMaxHeight#0" />
@@ -110,8 +108,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/helperFunctions.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="520">
-              <caret line="87" column="20" selection-start-line="87" selection-start-column="20" selection-end-line="87" selection-end-column="20" />
+            <state>
+              <caret column="31" selection-start-column="31" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -119,8 +117,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/initGlobe.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="428">
-              <caret line="69" column="37" selection-start-line="69" selection-start-column="37" selection-end-line="69" selection-end-column="37" />
+            <state relative-caret-position="1035">
+              <caret line="69" column="57" selection-start-line="69" selection-start-column="57" selection-end-line="69" selection-end-column="57" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -131,8 +129,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/initScene.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="41" lean-forward="true" selection-start-column="41" selection-end-column="41" />
+            <state relative-caret-position="375">
+              <caret line="25" column="8" selection-start-line="25" selection-start-column="8" selection-end-line="25" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -140,8 +138,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/handleUI.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+            <state relative-caret-position="360">
+              <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
             </state>
           </provider>
         </entry>
@@ -165,6 +163,13 @@
       <find>Mayo</find>
       <find>40.7355074,-73.9942686</find>
       <find>console.log(</find>
+      <find>console.log</find>
+      <find>arrowSize</find>
+      <find>arrowsSize</find>
+      <find>arrows</find>
+      <find>maxCoun</find>
+      <find>maxC</find>
+      <find>maxCount</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -177,12 +182,12 @@
         <option value="$PROJECT_DIR$/js/loadData.js" />
         <option value="$PROJECT_DIR$/data/locationDictionary.txt" />
         <option value="$PROJECT_DIR$/js/initGlobe.js" />
-        <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/js/initScene.js" />
-        <option value="$PROJECT_DIR$/js/handleUI.js" />
-        <option value="$PROJECT_DIR$/js/arrows.js" />
         <option value="$PROJECT_DIR$/data/locationDictionary.json" />
+        <option value="$PROJECT_DIR$/js/initScene.js" />
         <option value="$PROJECT_DIR$/js/processData.js" />
+        <option value="$PROJECT_DIR$/js/arrows.js" />
+        <option value="$PROJECT_DIR$/js/handleUI.js" />
+        <option value="$PROJECT_DIR$/index.html" />
       </list>
     </option>
   </component>
@@ -208,16 +213,6 @@
             <path>
               <item name="Fulbright Map Visualizer" type="b2602c69:ProjectViewProjectNode" />
               <item name="Fulbright Map Visualizer" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Fulbright Map Visualizer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Fulbright Map Visualizer" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Fulbright Map Visualizer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Fulbright Map Visualizer" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -267,18 +262,19 @@
       <workItem from="1547567449519" duration="5851000" />
       <workItem from="1547734174748" duration="6810000" />
       <workItem from="1547817622780" duration="3756000" />
-      <workItem from="1547942337591" duration="4471000" />
+      <workItem from="1547942337591" duration="4990000" />
+      <workItem from="1548441299339" duration="8535000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26003000" />
+    <option name="totallyTimeSpent" value="35057000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2494043" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2494043" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -335,79 +331,25 @@
     <entry file="file://$PROJECT_DIR$/data/map.json">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/loadData.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/handleUI.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/initScene.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="41" lean-forward="true" selection-start-column="41" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data/Fulbright Database - Fulbright Database.csv">
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
+      <provider selected="true" editor-type-id="csv-text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="57" selection-start-line="2" selection-start-column="57" selection-end-line="2" selection-end-column="68" />
+        </state>
       </provider>
       <provider editor-type-id="text-editor">
         <state>
           <caret column="223" lean-forward="true" selection-start-column="223" selection-end-column="223" />
         </state>
       </provider>
-      <provider selected="true" editor-type-id="csv-text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="57" selection-start-line="2" selection-start-column="57" selection-end-line="2" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/Fulbright Database - Fulbright Database.tsv">
       <provider editor-type-id="csv-table-editor">
         <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/Fulbright Database - Fulbright Database.tsv">
       <provider selected="true" editor-type-id="csv-text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/helperFunctions.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="520">
-          <caret line="87" column="20" selection-start-line="87" selection-start-column="20" selection-end-line="87" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/initGlobe.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="428">
-          <caret line="69" column="37" selection-start-line="69" selection-start-column="37" selection-end-line="69" selection-end-column="37" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/arrows.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1676">
-          <caret line="114" column="12" lean-forward="true" selection-start-line="114" selection-start-column="12" selection-end-line="114" selection-end-column="12" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="n#!!block;n#makeArrowsFromPlaces#0" />
-            <element signature="n#!!block;n#arrowsUpdate#0" />
-            <element signature="n#!!block;n#makeRandomArrows#0" />
-            <element signature="n#!!block;n#findArrowMinimumHeight#0" />
-            <element signature="n#!!block;n#findArrowMaxHeight#0" />
-            <element signature="n#!!block;n#findArrowCurrentHeight#0" />
-          </folding>
-        </state>
+      <provider editor-type-id="csv-table-editor">
+        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/data/locationDictionary.json">
@@ -417,17 +359,70 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
+    <entry file="file://$PROJECT_DIR$/js/loadData.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="30" column="25" selection-start-line="30" selection-start-column="25" selection-end-line="30" selection-end-column="25" />
+        <state>
+          <caret selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/initGlobe.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1035">
+          <caret line="69" column="57" selection-start-line="69" selection-start-column="57" selection-end-line="69" selection-end-column="57" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/helperFunctions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="31" selection-start-column="31" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/initScene.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="8" selection-start-line="25" selection-start-column="8" selection-end-line="25" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/arrows.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!block;n#makeArrowsFromPlaces#0" />
+            <element signature="n#!!block;n#makeRandomArrows#0" />
+            <element signature="n#!!block;n#findArrowMinimumHeight#0" />
+            <element signature="n#!!block;n#findArrowMaxHeight#0" />
+            <element signature="n#!!block;n#findArrowCurrentHeight#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/handleUI.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/processData.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="69" column="23" selection-start-line="69" selection-start-column="23" selection-end-line="69" selection-end-column="23" />
+        <state relative-caret-position="200">
+          <caret line="89" column="122" selection-start-line="89" selection-start-column="99" selection-end-line="89" selection-end-column="122" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="593">
+          <caret line="58" lean-forward="true" selection-start-line="58" selection-end-line="58" />
         </state>
       </provider>
     </entry>

@@ -25,7 +25,7 @@ function initScene() {
 
     //makeArrowsFromPlaces(20);
     //makeArrowsFromPlaces(1);
-    makeArrowsFromAllData();
+    makeArrowsFromData("all");
     arrowsUpdate();
 
     renderer.render(scene, camera);

@@ -1,6 +1,6 @@
 const key = 'AIzaSyC18z_iqn0b-M7jto7qR9uKcIUvcZT_EHQ';
 var locationDictionary = {};
-var records = [];
+var subjectDictionary = { all: [] };
 
 $(document).ready(function() {
     $.ajax({
@@ -57,16 +57,26 @@ function processData(data) {
                 deffereds.push($.get(url, callbackFunction(address)));
             }
 
-            records.push(record); // Add the record to the end of records
+            //records.push(record); // Add the record to the end of records
+        }
+        if(recordData[2] !== "") { // Current Position
+            subjectDictionary["all"].push(record);
+
+            if(subjectDictionary[record["Field of Specialization"]] === undefined) {
+                subjectDictionary[record["Field of Specialization"]] = [record];
+            }
+            else {
+                subjectDictionary[record["Field of Specialization"]].push(record);
+            }
         }
 
     }
-    console.log("out of for loop");
+    //console.log("out of for loop");
     $.when.apply(deffereds).then(function(){
-        console.log("ran function");
+        //console.log("ran function");
+        initUI();
         initScene();
         initGlobe();
-        initUI();
         arrowsUpdate();
     });
 }

@@ -2,10 +2,31 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Fulbright Visualizer</title>
 </head>
 
 <body>
+<h1>Fulbright Scholarship Visualizer</h1>
+<p>This is a visualizer for data in the fulbright scholarship program. Each arrow represents one or multiple scholars who have entered the program in a given year, from a given institution, to another given institution.
+Currently, the data being visualized comes from a data set of scholars from Turkey to the United States. </p>
+<h2>Technology Used</h2>
+<p>The following tools were used to create the app below:</p>
+<ul>
+    <li><a href="https://d3js.org/">D3.js, Data-Driven Documents</a></li>
+    <li><a href="https://threejs.org/">Three.js</a></li>
+    <li><a href="https://developers.google.com/maps/documentation/geocoding/start">Google's Geocoding API</a></li>
+    <li><a href="https://jquery.com/">JQuery</a></li>
+</ul>
+<p>D3 was used to generate the globe out of map data obtained from <a href="http://www.naturalearthdata.com/">Natural Earth</a>.
+D3 was also used to take mouse input from the user. Three.js is a webGL based rendering library, which I used to render the globe and arrows to the screen.
+The arrows are created using 2 geographic coordinates (for home institution and visiting institution), which are then converted to
+points in 3D space. However, the data set of scholars only included the names of institutions scholars used. Google's Geocoding
+API was accessed using JQuery to convert these names into geographic coordinates, which can then be converted into arrows on the globe.</p>
+
+<h2>How to use</h2>
+<p>The number selector is the number of years from the starting year. The bar selector selects the starting year, and the drop down selector is used to show only data of a given subject (currently broken).
+Click and drag the globe to rotate. The width of an arrow denotes how many scholars it represents, the height of the arrow denotes how recent
+that scholar began their exchange, in relation to the starting year.</p>
 <script src="libs/three.js"></script>
 <script src="libs/d3.js"></script>
 <script src="libs/jQuery.js"></script>
@@ -18,14 +39,20 @@
 <script src="js/arrows.js"></script>
 <script src="js/initScene.js"></script>
 <script src="js/initGlobe.js"></script>
+<!--<script src="js/Bootstrap/bootstrap.min.js"></script>
+<script src="css/bootstrap.min.css"></script>-->
+
 
 <div id="slidebar-container">
     <h3>Time and Range</h3>
     <input type="number" min="1" max="22" value="7" id="rangeNumber">
-    <input type="range" min="1997" max="2019" value="1997" class="slider" id="timeSlider">
+    <input type="range" min="1997" max="2008" value="1997" class="slider" id="timeSlider">
+    <select id="subjectSelector"></select>
+
     <p>SliderValue: <span id="demoSlider"></span></p>
     <p>RangeValue: <span id="demoRange"></span></p>
+
 </div>
 
-<script src="js/processData.js"></script>
 <script src="js/handleUI.js"></script>
+<script src="js/processData.js"></script>

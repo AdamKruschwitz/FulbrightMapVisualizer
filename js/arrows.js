@@ -6,11 +6,10 @@ const arrowLength = 8,                      // Length of arrows (in units?)
     maxHeightAboveGlobe = 80,               // Max height above the ground (in units?)
     origin = new THREE.Vector3(0, 0, 0);    // A vector at the origin for math
 
-var arrows = [],                            // An array to store all arrows
-    arrowsSize = 0;                         // the size of the arrows array
-var maxCount = 0;
+var arrows = [],                            // An array to store all arrows// the size of the arrows array
+    maxCount = 0;
 
-function makeArrow(startPoint, endPoint, year, count) {
+function makeArrow(startPoint, endPoint, year, count, subject) {
 
     // load a resource
     ObjLoader.load(
@@ -18,7 +17,8 @@ function makeArrow(startPoint, endPoint, year, count) {
         'data/Arrow.obj',
         // called when resource is loaded
         function ( object ) {
-
+            object.name = "arrow";
+            object.subject = subject;
             // Convert longitude and latitude to a vector3
             let startVector3 = vertex(startPoint);
             let endVector3 = vertex(endPoint);
@@ -36,7 +36,7 @@ function makeArrow(startPoint, endPoint, year, count) {
             // Determine the scale values of the arrow
             let zScale = startVector3.distanceTo(endVector3) / arrowLength;
             let yScale = findArrowCurrentHeight(startVector3, endVector3, year);
-            let xScale = zScale * count / maxCount;
+            let xScale = zScale * 1.45 * count / maxCount;
             object.scale.set(xScale, yScale, zScale);
 
             /*
@@ -99,8 +99,7 @@ function makeArrow(startPoint, endPoint, year, count) {
             object.rotation.setFromQuaternion(quaternion);
 
             pivot.add( object );
-            arrows[arrowsSize] = object;
-            arrowsSize++;
+            arrows.push(object);
 
         },
         // called when loading is in progresses
@@ -146,8 +145,18 @@ function makeArrowsFromPlaces(numOfArrows) {
     }
 }
 
-function makeArrowsFromAllData() {
+function makeArrowsFromData() {
+    let records = subjectDictionary["all"];
+
     // Sort records by year, then by to location, then by from location
+    records.sort(function(a, b) {
+        if(a["Field of Specialization"] < b["Field of Specialization"])
+            return -1;
+        else if(a["Field of Specialization"] > b["Field of Specialization"])
+            return 1;
+        else return 0;
+    });
+
     records.sort(function(a, b) {
         if(a["TR_Institution"] < b["TR_Institution"])
             return -1;
@@ -179,11 +188,13 @@ function makeArrowsFromAllData() {
         curTRInstitution = records[0]["TR_Institution"],
         curUSInstitution = records[0]["US_Institution"],
         curGrantDate = records[0]["Grant Date"],
+        curSubject = records[0]["Field of Specialization"],
         count = 1;
     while(i < records.length) {
         if(records[i]["TR_Institution"] === curTRInstitution &&
             records[i]["US_Institution"] === curUSInstitution &&
-            records[i]["Grant Date"] === curGrantDate) {
+            records[i]["Grant Date"] === curGrantDate &&
+            records[i]["Field of Specialization"]) {
             count++;
         }
         else {
@@ -195,6 +206,7 @@ function makeArrowsFromAllData() {
                 curTRInstitution = records[i]["TR_Institution"];
                 curUSInstitution = records[i]["US_Institution"];
                 curGrantDate = records[i]["Grant Date"];
+                curSubject = records[0]["Field of Specialization"];
                 count = 1;
             } else console.log("Error: one or more record locations not in dictionary");
         }
@@ -202,29 +214,65 @@ function makeArrowsFromAllData() {
         i++;
     }
 
-    uniqueArrows[uniqueArrows.length] = {"start":locationDictionary[curTRInstitution], "end":locationDictionary[curUSInstitution], "year":curGrantDate, "count":count};
+    uniqueArrows[uniqueArrows.length] = {"start":locationDictionary[curTRInstitution], "end":locationDictionary[curUSInstitution], "year":curGrantDate, "count":count, "subject":curSubject};
     if(maxCount < count) maxCount = count;
 
     uniqueArrows.forEach(function(arrow) {
-        makeArrow(arrow["start"], arrow["end"], arrow["year"], arrow["count"]);
+        makeArrow(arrow["start"], arrow["end"], arrow["year"], arrow["count"], arrow["subject"]);
     });
     arrowsUpdate();
+}
+
+/*
+NOTE: this function does not get all arrows like it should. pivot.remove() in the loop will sometimes skip arrows
+for some reason, so mass deletions like this should be done differently. Arrows not in the arrows array can be found
+in the pivot.child array with name "arrows".
+ */
+function deleteAllArrows() {
+    for(let i=0; i<arrows.length; i++) {
+        pivot.remove(arrows.pop());
+    }
+    arrows = [];
+    let remainingArrows = true;
+    while(!remainingArrows) {
+        remainingArrows = false;
+        pivot.children.forEach(function (child) {
+            if(child.name === "arrow") {
+                remainingArrows = true;
+                pivot.remove(child);
+            }
+        });
+    }
 }
 
 /*
 Updates all the arrows height values
 */
 function arrowsUpdate() {
-    for(let i=0; i<arrowsSize; i++) {
+    for(let i=0; i<arrows.length; i++) {
         let yScale = findArrowCurrentHeight(arrows[i].start, arrows[i].end, arrows[i].year);
         let xScale = arrows[i].scale.x;
         let zScale = arrows[i].scale.y;
         if(yScale === -1) arrows[i].visible = false;
+        //else if( arrows[i].subject === subjectSelector.value) arrows[i].visible = true;
         else arrows[i].visible = true;
 
         arrows[i].scale.y = yScale;
         //console.log("updated arrow of year " +arrows[i].year + " to height: " + yScale );
     }
+}
+
+function changeSubject(subject) {
+    if(subject === "all") {
+        arrows.forEach(function(arrow) {
+            arrow.visible = true;
+        });
+    }
+    arrows.forEach(function(arrow) {
+        if(arrow.subject === subject) arrow.visible = true;
+        else arrow.visible = false;
+    });
+    arrowsUpdate();
 }
 
 /*
